@@ -26,9 +26,9 @@ public class UserController {
 
     @PostMapping("/addUser")
     public ResponseEntity<Object> addUser(@RequestBody @Valid User user, BindingResult bindingResult) {
-        System.out.println("addUser");
+//        System.out.println("addUser");
         Map<String, Object> addUserMap = new HashMap<>();
-        System.out.println(user);
+//        System.out.println(user);
         //参数校验
         if (bindingResult.hasErrors()) {
             //获取第一个校验失败的错误下信息

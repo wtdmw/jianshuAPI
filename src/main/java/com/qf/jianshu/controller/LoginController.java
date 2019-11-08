@@ -23,8 +23,8 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<Object> addUser(@RequestBody @Valid LoginInfo loginInfo, BindingResult bindingResult) {
         Map<String, Object> loginInfoMap = new HashMap<>();
-        System.out.println("login");
-        System.out.println(loginInfo);
+//        System.out.println("login");
+//        System.out.println(loginInfo);
 
         //参数校验
         if (bindingResult.hasErrors()) {
@@ -48,9 +48,9 @@ public class LoginController {
     @PostMapping("/test/sss")
     public ResponseEntity<Object> test(@RequestBody LoginInfo loginInfo, @RequestHeader(name = "nickName") String nickName) {
         Map<String, Object> loginInfoMap = new HashMap<>();
-        System.out.println("test");
-        System.out.println(nickName);
-        System.out.println(loginInfo);
+//        System.out.println("test");
+//        System.out.println(nickName);
+//        System.out.println(loginInfo);
 
         loginInfoMap.put("data", "666");
         return new ResponseEntity<>(loginInfoMap, HttpStatus.OK);

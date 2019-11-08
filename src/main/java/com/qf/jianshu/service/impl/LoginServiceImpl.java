@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 
 //        签发token
         String token = new TokenUtil().generateToken(usersList.get(0), (loginInfo.isRememberMe() ? 1296000000 : 0));
-        System.out.println(token);
+//        System.out.println(token);
         map.put("status", "ok");
         map.put("token", token);
 

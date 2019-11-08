@@ -19,7 +19,7 @@ public class ServletFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("拦截器");
+//        System.out.println("拦截器");
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse rep = (HttpServletResponse) response;
@@ -37,14 +37,14 @@ public class ServletFilter implements Filter {
         String method = ((HttpServletRequest) request).getMethod();
         //登录注册请求
         String requestURI = req.getRequestURI();
-        System.out.println(requestURI);
+//        System.out.println(requestURI);
         //放行
         if (requestURI.equals("/login") || requestURI.equals("/user/addUser")) {
             if (method.equals("OPTIONS")) {
                 rep.setStatus(HttpServletResponse.SC_OK);
                 return;
             }
-            System.out.println("放行");
+//            System.out.println("放行");
             chain.doFilter(req, rep);
         } else {
             response.setCharacterEncoding("UTF-8");
@@ -57,7 +57,7 @@ public class ServletFilter implements Filter {
                 //获取token 验证token
                 Cookie[] cookie = req.getCookies();
                 if (cookie != null) {
-                    System.out.println("以获取cookie");
+//                    System.out.println("以获取cookie");
                     for (Cookie cook : cookie) {
                         System.out.println(cook.getName() + cook.getValue());
                         if (cook.getName().equalsIgnoreCase("token")) { //获取键 
@@ -76,7 +76,7 @@ public class ServletFilter implements Filter {
                 }
 
                 if (isFilter) {
-                    System.out.println("token验证成功");
+//                    System.out.println("token验证成功");
 
                     HeaderMapRequestWrapper requestWrapper = new HeaderMapRequestWrapper(req);
                     //依据你自己的业务通过userId获取userName
@@ -84,7 +84,7 @@ public class ServletFilter implements Filter {
 
                     chain.doFilter(requestWrapper, response);
                 } else {
-                    System.out.println("token验证失败");
+//                    System.out.println("token验证失败");
                     rep.sendError(401, "未登录");
                     PrintWriter writer = null;
                     OutputStreamWriter osw = null;
