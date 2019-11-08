@@ -1,0 +1,20 @@
+spring:
+  datasource: #数据源配置
+    url: jdbc:mysql://47.98.205.116:3306/jianshu?autoReconnect=true #在线数据库
+    username: jianshu
+    password: aaBS8sj4B2xr2pAi
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false #静态资源文件是否缓存，开发是关闭缓存
+  mvc:
+    static-path-pattern: /static/**
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名映射
+
+logging:
+  level:
+    com.hehe.mapper: debug #打印SQL信息
+
+

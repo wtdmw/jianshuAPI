@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "yuyanjia.filter.cors.allowed-origin-list",
+      "type": "java.lang.String",
+      "description": "Description for yuyanjia.filter.cors.allowed-origin-list."
+  }
+] }
