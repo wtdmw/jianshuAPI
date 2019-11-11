@@ -62,7 +62,7 @@ public class ServletFilter implements Filter {
                         System.out.println(cook.getName() + cook.getValue());
                         if (cook.getName().equalsIgnoreCase("token")) { //获取键 
 
-                            System.out.println(cook.getValue());
+//                            System.out.println(cook.getValue());
                             //验证token是否过期
                             Boolean tokenExpired = new TokenUtil().isTokenExpired(cook.getValue());
 

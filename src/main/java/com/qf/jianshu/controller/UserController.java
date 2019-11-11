@@ -38,12 +38,13 @@ public class UserController {
 
         //添加用户
         String createUser = userService.createUser(user);
+        addUserMap.put("message", createUser);
         //业务错误
         if (!createUser.equals("ok")) {
-            return new ResponseEntity<>(createUser, HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(addUserMap, HttpStatus.FORBIDDEN);
         }
 
-        addUserMap.put("data", user);
+        addUserMap.put("data", "注册成功");
         return new ResponseEntity<>(addUserMap, HttpStatus.OK);
     }
 

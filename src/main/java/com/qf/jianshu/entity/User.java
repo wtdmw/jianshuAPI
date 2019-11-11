@@ -5,7 +5,7 @@ import javax.validation.constraints.Pattern;
 
 public class User {
 
-    private int id;
+    private String id;
     @NotBlank(message = "昵称不能为空")
     @Pattern(regexp = "^[\\u4E00-\\u9FA5A-Za-z0-9]+$", message = "昵称格式错误,不包括符号")
     private String nickName;
@@ -31,11 +31,11 @@ public class User {
                 '}';
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

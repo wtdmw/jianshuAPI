@@ -21,7 +21,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<Object> addUser(@RequestBody @Valid LoginInfo loginInfo, BindingResult bindingResult) {
+    public ResponseEntity<Object> login(@RequestBody @Valid LoginInfo loginInfo, BindingResult bindingResult) {
         Map<String, Object> loginInfoMap = new HashMap<>();
 //        System.out.println("login");
 //        System.out.println(loginInfo);
