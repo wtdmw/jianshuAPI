@@ -12,6 +12,10 @@ public interface UserMapper {
     @Select("select * from js_user where nickName like #{nickName}")
     List<User> queryNickName(String nickName);
 
+    //    根据用户id查询用户信息
+    @Select("select * from js_user where id like #{id}")
+    User querUserinfo(String id);
+
     //    查询用户表手机号
     @Select("select * from js_user where mobileNumber like #{mobileNumber}")
     List<User> querymobileNumber(String mobileNumber);

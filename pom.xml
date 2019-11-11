@@ -42,6 +42,12 @@
             <version>1.1.4</version>
         </dependency>
 
+        <dependency><!-- pagehelper 分页插件 -->
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.6</version>
+        </dependency>
+
         <dependency><!--添加Mybatis依赖 -->
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
