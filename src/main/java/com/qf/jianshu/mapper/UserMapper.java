@@ -21,6 +21,6 @@ public interface UserMapper {
     List<User> queryNickNamePassword(String nickName, String password);
 
     //    添加用户
-    @Insert("INSERT INTO js_user(nickName,mobileNumber,password) VALUES(#{nickName}, #{mobileNumber}, #{password})")
+    @Insert("INSERT INTO js_user(id,nickName,mobileNumber,password,timeStamp) VALUES(#{id}, #{nickName}, #{mobileNumber}, #{password}, #{timeStamp})")
     int addUser(User user);
 }

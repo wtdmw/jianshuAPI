@@ -5,7 +5,11 @@ import com.qf.jianshu.mapper.UserMapper;
 import com.qf.jianshu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.misc.BASE64Encoder;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +31,15 @@ public class UserServiceImpl implements UserService {
             return "手机号已注册";
         }
 //        添加用户
+//        生成id
+
+        user.setId(new BASE64Encoder().encode(user.getNickName().getBytes(StandardCharsets.UTF_8)));
+        System.out.println(user.getId());
+//      获取创建时间
+        long time = new Date().getTime();
+        System.out.println(time);
+        user.setTimeStamp(time);
+
         int addUserInt = userMapper.addUser(user);
         if (addUserInt != 1) {
             return "注册失败";

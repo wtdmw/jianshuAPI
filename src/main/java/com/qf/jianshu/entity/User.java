@@ -18,18 +18,29 @@ public class User {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", message = "密码格式错误,八个以上字母和数字")
     private String password;
 
-    private int enable;
+    private Long timeStamp;
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", nickName='" + nickName + '\'' +
-                ", mobileNumber=" + mobileNumber +
+                ", mobileNumber='" + mobileNumber + '\'' +
                 ", password='" + password + '\'' +
+                ", timeStamp=" + timeStamp +
                 ", enable=" + enable +
                 '}';
     }
+
+    public Long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    private int enable;
 
     public String getId() {
         return id;
