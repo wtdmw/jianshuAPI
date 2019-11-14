@@ -4,6 +4,7 @@ import com.qf.jianshu.entity.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
@@ -25,7 +26,7 @@ public interface UserMapper {
 
     //    查询用户表昵称+密码
     @Select("select * from js_user where nickName like #{nickName} and password like #{password}")
-    List<User> queryNickNamePassword(String nickName, String password);
+    List<Map> queryNickNamePassword(String nickName, String password);
 
     //    添加用户
     @Insert("INSERT INTO js_user(id,nickName,mobileNumber,password,timeStamp) VALUES(#{id}, #{nickName}, #{mobileNumber}, #{password}, #{timeStamp})")
