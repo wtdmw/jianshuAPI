@@ -15,6 +15,6 @@ public interface SpecialArticlesMapper {
     List<SpeicalArticlesUser> speicalArticles(String nickNames);
 
 
-    @Select("SELECT js_user.avatarPath ,js_user.nickName FROM js_user WHERE js_user.nickName = #{nickName};")
+    @Select("SELECT js_user.avatarPath ,js_user.nickName,js_user.id FROM js_user WHERE js_user.nickName = #{nickName};")
    SpeicalArticlesUser user(String nickNames);
 }

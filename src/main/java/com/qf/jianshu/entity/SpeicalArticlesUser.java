@@ -3,7 +3,7 @@ package com.qf.jianshu.entity;
 import java.io.Serializable;
 
 public class SpeicalArticlesUser implements Serializable {
-    private Integer id;
+    private String  id;
     private String title;
     private String authorId;
     private String content;
@@ -26,11 +26,11 @@ public class SpeicalArticlesUser implements Serializable {
                 '}';
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

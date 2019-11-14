@@ -22,7 +22,7 @@ public interface CommentMapper {
     /**
      * 获取评论信息
      */
-    @Select("select js_comment.id,js_comment.commentContent,js_comment.`timeStamp`,js_comment.userId,js_comment.articleId,js_article.title,js_user.avatarPath,js_user.nickName\n" +
+    @Select("select  js_comment.commentUserId,js_comment.id,js_comment.commentContent,js_comment.`timeStamp`,js_comment.userId,js_comment.articleId,js_article.title,js_user.avatarPath,js_user.nickName\n" +
             "from js_comment\n" +
             "LEFT JOIN js_article \n" +
             "ON js_article.id=js_comment.articleId\n" +
@@ -34,7 +34,7 @@ public interface CommentMapper {
     /**
      * 获取喜欢信息
      */
-    @Select("select js_user_article_zan.`timeStamp`,js_article.title,js_user.avatarPath,js_user.nickName\n" +
+    @Select("select js_user_article_zan.likesUserId,js_user_article_zan.`timeStamp`,js_article.title,js_user.avatarPath,js_user.nickName\n" +
             "from js_user_article_zan \n" +
             "LEFT JOIN js_article\n" +
             "on js_user_article_zan.articleId=js_article.id\n" +
