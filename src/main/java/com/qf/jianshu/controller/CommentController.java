@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,9 +34,40 @@ public class CommentController {
     }
 
     @GetMapping("/likes")
-    public ResponseEntity<Object> findLikes(@RequestHeader(name = "nickName") String nickName){
+    public ResponseEntity<Object> findLikes(@RequestHeader(name = "nickName") String nickName) {
         List<Map> maps = commentService.likesReceived(nickName);
-        return new ResponseEntity<>(maps,HttpStatus.OK);
+        return new ResponseEntity<>(maps, HttpStatus.OK);
+    }
+
+    @GetMapping("/follow")
+    public ResponseEntity<Object> follow(@RequestHeader(name = "nickName") String nickName) {
+        Map maps = commentService.followList(nickName);
+        return new ResponseEntity<>(maps, HttpStatus.OK);
+    }
+
+    //关注用户
+    @PostMapping("/follow")
+    public ResponseEntity<Object> followUser(@RequestHeader(name = "nickName") String nickName, @RequestBody Map<String, String> data) {
+        Map<String, Object> map = new HashMap<>();
+        String followUserid = commentService.followUser(nickName, data.get("followUserid"));
+        if (followUserid.equals("ok")) {
+            map.put("data", "ok");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    //取消关注用户
+    @DeleteMapping("/follow")
+    public ResponseEntity<Object> unfollowUser(@RequestHeader(name = "nickName") String nickName, @RequestBody Map<String, String> data) {
+        System.out.println(data.toString());
+        Map<String, Object> map = new HashMap<>();
+        String unfollowUser = commentService.unfollowUser(nickName, data.get("followUserid"));
+        if (unfollowUser.equals("ok")) {
+            map.put("data", "ok");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 }

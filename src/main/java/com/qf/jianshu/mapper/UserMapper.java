@@ -11,8 +11,6 @@ public interface UserMapper {
     @Select("select id from js_user where nickName like #{nickName}")
     String queryUserId(String nickName);
 
-
-
     //    查询用户表昵称
     @Select("select * from js_user where nickName like #{nickName}")
     List<User> queryNickName(String nickName);

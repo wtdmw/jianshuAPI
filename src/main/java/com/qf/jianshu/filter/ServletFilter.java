@@ -28,7 +28,7 @@ public class ServletFilter implements Filter {
         //设置允许跨域的配置
         // 这里填写你允许进行跨域的主机ip（正式上线时可以动态配置具体允许的域名和IP）
         rep.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        rep.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        rep.setHeader("Access-Control-Allow-Methods", "POST,PUT,GET, OPTIONS, DELETE");
         rep.setHeader("Access-Control-Max-Age", "3600");
         rep.setHeader("Access-Control-Allow-Headers", "token,Origin, X-Requested-With, Content-Type, Accept");
         rep.setHeader("Access-Control-Allow-Credentials", "true");

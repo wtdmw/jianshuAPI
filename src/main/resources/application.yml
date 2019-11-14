@@ -4,8 +4,6 @@ spring:
     username: jianshu
     password: aaBS8sj4B2xr2pAi
     driver-class-name: com.mysql.cj.jdbc.Driver
-  thymeleaf:
-    cache: false #静态资源文件是否缓存，开发是关闭缓存
   mvc:
     static-path-pattern: /static/**
 
@@ -16,5 +14,3 @@ mybatis:
 logging:
   level:
     com.hehe.mapper: debug #打印SQL信息
-
-
