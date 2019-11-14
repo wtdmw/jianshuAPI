@@ -23,9 +23,9 @@ public class TokenUtil implements Serializable {
     private static final String SECRET = "secret";
 
     //    签发JWT
-    public String generateToken(User user, long expirationTime) {
+    public String generateToken(Map user, long expirationTime) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, user.getNickName());
+        claims.put(CLAIM_KEY_USERNAME, user.get("nickName"));
 
         if (expirationTime == 0) {
             expirationTime = EXPIRATION_TIME;

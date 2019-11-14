@@ -24,7 +24,7 @@ public class LoginServiceImpl implements LoginService {
         Map<String, Object> map = new HashMap<String, Object>();
 
 //        查询用户表
-        List<User> usersList = userMapper.queryNickNamePassword(loginInfo.getNickName(), loginInfo.getPassword());
+        List<Map> usersList = userMapper.queryNickNamePassword(loginInfo.getNickName(), loginInfo.getPassword());
         if (usersList.size() == 0) {
             map.put("status", "密码或账号错误");
             return map;
@@ -36,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
 //        System.out.println(token);
         map.put("status", "ok");
         map.put("token", token);
-
+        map.put("user", usersList.get(0));
         return map;
     }
 }
