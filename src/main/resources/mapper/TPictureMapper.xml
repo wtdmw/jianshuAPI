@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.jianshu.mapper.TPictureMapper">
+  <resultMap id="BaseResultMap" type="com.qf.jianshu.entity.TPicture">
+    <!--@mbg.generated-->
+    <!--@Table t_picture-->
+    <id column="t_picture_id" jdbcType="INTEGER" property="tPictureId" />
+    <result column="t_picture_path" jdbcType="VARCHAR" property="tPicturePath" />
+    <result column="t_picture_article_id" jdbcType="INTEGER" property="tPictureArticleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    t_picture_id, t_picture_path, t_picture_article_id
+  </sql>
+  <resultMap id="PictureMap" type="com.qf.jianshu.entity.TPicture">
+    <result property="TPicturePath" column="t_picture_path"/>
+  </resultMap>
+  <select id="findByAid" resultMap="PictureMap" parameterType="integer">
+    select t_picture_path
+    from t_picture
+    where t_picture_article_id=#{aid,jdbcType=INTEGER}
+  </select>
+</mapper>

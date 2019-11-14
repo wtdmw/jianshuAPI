@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.jianshu.mapper.TArticleTypeMapper">
+  <resultMap id="BaseResultMap" type="com.qf.jianshu.entity.TArticleType">
+    <!--@mbg.generated-->
+    <!--@Table t_article_type-->
+    <id column="t_type_id" jdbcType="INTEGER" property="tTypeId" />
+    <result column="t_type_describe" jdbcType="VARCHAR" property="tTypeDescribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    t_type_id, t_type_describe
+  </sql>
+  <resultMap id="TypeToArticleMap" type="com.qf.jianshu.vo.TypeToArticleVo">
+    <id column="t_type_id" jdbcType="INTEGER" property="tTypeId" />
+    <result column="t_type_describe" jdbcType="VARCHAR" property="tTypeDescribe" />
+    <collection property="articles" ofType="com.qf.jianshu.entity.TArticle">
+      <id column="t_article_id" property="tArticleId"/>
+      <result column="t_article_title" property="tArticleTitle"/>
+      <result column="t_article_reading_count" property="TArticleReadingCount"/>
+    </collection>
+  </resultMap>
+  <select id="typeToArticle" parameterType="integer" resultMap="TypeToArticleMap">
+    select a.t_article_title,a.t_article_id,a.t_article_reading_count,t.t_type_id,t.t_type_describe from t_article a
+    LEFT JOIN t_middle_article_type m on t_article_id=t_middle_article_id
+    left join t_article_type t on t_type_id=t_middle_type_id
+    where t.t_type_id=#{typeId}
+  </select>
+</mapper>

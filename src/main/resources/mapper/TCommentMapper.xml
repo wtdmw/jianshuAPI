@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.jianshu.mapper.TCommentMapper">
+  <resultMap id="BaseResultMap" type="com.qf.jianshu.entity.TComment">
+    <!--@mbg.generated-->
+    <!--@Table t_comment-->
+    <id column="t_comment_id" jdbcType="INTEGER" property="tCommentId" />
+    <result column="t_user_id" jdbcType="INTEGER" property="tUserId" />
+    <result column="t_comment_content" jdbcType="VARCHAR" property="tCommentContent" />
+    <result column="t_comment_time" jdbcType="TIMESTAMP" property="tCommentTime" />
+    <result column="t_comment_good_count" jdbcType="INTEGER" property="tCommentGoodCount" />
+    <result column="t_comment_reply_count" jdbcType="INTEGER" property="tCommentReplyCount" />
+    <result column="t_comment_status" jdbcType="INTEGER" property="tCommentStatus" />
+    <result column="t_comment_article_id" jdbcType="INTEGER" property="tCommentArticleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    t_user_id, t_comment_content, t_comment_time, t_comment_good_count, t_comment_reply_count
+  </sql>
+  <resultMap id="CommentMap" type="com.qf.jianshu.vo.CommentVo">
+      <result column="t_user_id" jdbcType="INTEGER" property="tUserId" />
+      <result column="t_comment_content" jdbcType="VARCHAR" property="tCommentContent" />
+      <result column="t_comment_time" jdbcType="TIMESTAMP" property="tCommentTime" />
+      <result column="t_comment_good_count" jdbcType="INTEGER" property="tCommentGoodCount" />
+      <result column="t_comment_reply_count" jdbcType="INTEGER" property="tCommentReplyCount" />
+      <association property="user" javaType="com.qf.jianshu.entity.TUser" column="t_user_id"
+      select="com.qf.jianshu.mapper.TUserMapper.commentToUserId"/>
+  </resultMap>
+  <select id="findByAId" parameterType="integer" resultMap="CommentMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    t_comment
+    where t_comment_status=0
+    and t_comment_article_id=#{aId,jdbcType=INTEGER}
+    order by t_comment_time desc
+  </select>
+  <insert id="addComment" parameterType="com.qf.jianshu.entity.TComment">
+    insert into t_comment (t_user_id,t_comment_content, t_comment_time, t_comment_article_id)
+     values (#{tUserId},#{tCommentContent},#{tCommentTime},#{tCommentArticleId});
+  </insert>
+</mapper>

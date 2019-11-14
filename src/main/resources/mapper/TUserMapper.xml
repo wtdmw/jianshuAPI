@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.jianshu.mapper.TUserMapper">
+  <resultMap id="BaseResultMap" type="com.qf.jianshu.entity.TUser">
+    <!--@mbg.generated-->
+    <!--@Table t_user-->
+    <result column="t_user_head_picture" jdbcType="VARCHAR" property="tUserHeadPicture" />
+    <result column="t_user_nickname" jdbcType="VARCHAR" property="tUserNickname" />
+    <result column="t_user_explain" jdbcType="VARCHAR" property="tUserExplain" />
+    <result column="t_user_asset" jdbcType="DOUBLE" property="tUserAsset" />
+    <result column="t_user_words_count" jdbcType="INTEGER" property="tUserWordsCount" />
+    <result column="t_user_good_count" jdbcType="INTEGER" property="tUserGoodCount" />
+    <result column="t_user_fans_count" jdbcType="INTEGER" property="tUserFansCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    t_user_head_picture, t_user_nickname, t_user_explain, t_user_asset, t_user_words_count,
+    t_user_good_count, t_user_fans_count
+  </sql>
+  <select id="findByUserId" parameterType="integer" resultType="com.qf.jianshu.entity.TUser">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    t_user
+    where
+    t_user_id=#{userId,jdbcType=INTEGER}
+  </select>
+    <select id="commentToUserId" parameterType="integer" resultType="com.qf.jianshu.entity.TUser">
+        select t_user_head_picture,t_user_nickname
+        from t_user
+        where t_user_id=#{userId,jdbcType=INTEGER}
+    </select>
+</mapper>

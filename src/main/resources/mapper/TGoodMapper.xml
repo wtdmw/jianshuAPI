@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.jianshu.mapper.TGoodMapper">
+  <resultMap id="BaseResultMap" type="com.qf.jianshu.entity.TGood">
+    <!--@mbg.generated-->
+    <!--@Table t_good-->
+    <id column="t_good_id" jdbcType="INTEGER" property="tGoodId" />
+    <result column="t_user_id" jdbcType="INTEGER" property="tUserId" />
+    <result column="t_good_status" jdbcType="INTEGER" property="tGoodStatus" />
+    <result column="t_good_article_id" jdbcType="INTEGER" property="tGoodArticleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    t_good_id, t_user_id, t_good_status, t_good_article_id
+  </sql>
+  <resultMap id="GoodVoMap" type="com.qf.jianshu.vo.GoodVo">
+    <result property="TUserId" column="t_user_id"/>
+    <result property="tGoodStatus" column="t_good_status"/>
+    <association property="user" javaType="com.qf.jianshu.entity.TUser" column="t_user_id"
+                 select="com.qf.jianshu.mapper.TUserMapper.findByUserId"/>
+  </resultMap>
+  <select id="findByAid" parameterType="integer" resultMap="GoodVoMap">
+    select t_user_id,t_good_status
+    from t_good
+    where t_good_status=0
+    and t_good_article_id=#{aId,jdbcType=INTEGER}
+  </select>
+  <insert id="addGood" parameterType="com.qf.jianshu.entity.TGood">
+    insert into t_good(t_user_id,t_good_article_id) values(#{tUserId},#{tGoodArticleId})
+  </insert>
+  <update id="updateGood" parameterType="com.qf.jianshu.entity.TGood">
+    update t_good set t_good_status=#{tGoodStatus}
+    where t_user_id=#{tUserId}
+    and t_good_article_id=#{tGoodArticleId}
+  </update>
+</mapper>

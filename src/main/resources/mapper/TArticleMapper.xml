@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.jianshu.mapper.TArticleMapper">
+  <resultMap id="BaseResultMap" type="com.qf.jianshu.entity.TArticle">
+    <!--@mbg.generated-->
+    <!--@Table t_article-->
+    <id column="t_article_id" jdbcType="INTEGER" property="tArticleId" />
+    <result column="t_article_title" jdbcType="VARCHAR" property="tArticleTitle" />
+    <result column="t_article_content" jdbcType="LONGVARCHAR" property="tArticleContent" />
+    <result column="t_article_word_count" jdbcType="INTEGER" property="tArticleWordCount" />
+    <result column="t_article_reading_count" jdbcType="INTEGER" property="tArticleReadingCount" />
+    <result column="t_article_comment_count" jdbcType="INTEGER" property="tArticleCommentCount" />
+    <result column="t_article_good_count" jdbcType="INTEGER" property="tArticleGoodCount" />
+    <result column="t_article_last_time" jdbcType="TIMESTAMP" property="tArticleLastTime" />
+    <result column="t_article_user_id" jdbcType="INTEGER" property="tArticleUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    t_article_id, t_article_title, t_article_content, t_article_word_count, t_article_reading_count, 
+    t_article_comment_count, t_article_good_count,  t_article_last_time,t_article_user_id
+  </sql>
+  <select id="findById" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_article
+    where t_article_status=0
+    and t_article_id=#{articleId,jdbcType=INTEGER}
+  </select>
+  <resultMap id="ArticleToUserMap" type="com.qf.jianshu.vo.ArticleToUserVo">
+    <result column="t_article_user_id" jdbcType="INTEGER" property="tArticleUserId" />
+    <association property="user" column="t_article_user_id" javaType="com.qf.jianshu.entity.TUser"
+    select="com.qf.jianshu.mapper.TUserMapper.findByUserId"/>
+  </resultMap>
+  <select id="articleToUser" parameterType="integer" resultMap="ArticleToUserMap">
+    select
+    t_article_user_id
+    from t_article where t_article_status=0
+    and t_article_id=#{articleId,jdbcType=INTEGER}
+  </select>
+    <resultMap id="ArticleToCommentMap" type="com.qf.jianshu.vo.ArticleToCommentVo">
+        <id column="t_article_id" property="tArticleId"/>
+        <collection property="comments" ofType="com.qf.jianshu.entity.TComment" column="t_article_id"
+                    select="com.qf.jianshu.mapper.TCommentMapper.findByAId"/>
+    </resultMap>
+    <select id="articleToComment" parameterType="integer" resultMap="ArticleToCommentMap">
+        select t_article_id
+        from t_article
+        where t_article_status=0
+        and t_article_id=#{articleId,jdbcType=INTEGER}
+    </select>
+  <resultMap id="ArticleToType" type="com.qf.jianshu.vo.ArticleToTypeVo">
+    <id property="tArticleId" column="t_article_id"/>
+    <collection property="types" ofType="com.qf.jianshu.entity.TArticleType">
+      <id property="TTypeId" column="t_type_id"/>
+      <result property="TTypeDescribe" column="t_type_describe"/>
+    </collection>
+  </resultMap>
+  <select id="articleToType" resultMap="ArticleToType">
+    select t.t_type_describe,a.t_article_id,t.t_type_id
+    from t_article a
+    left outer join t_middle_article_type m on a.t_article_id=m.t_middle_article_id
+    left outer join t_article_type t on t.t_type_id=m.t_middle_type_id
+    where a.t_article_id=#{articleId,jdbcType=INTEGER}
+  </select>
+  <resultMap id="ArticleToGood" type="com.qf.jianshu.vo.ArticleToGood">
+    <id property="tArticleId" column="t_article_id"/>
+    <collection property="goods" ofType="com.qf.jianshu.entity.TGood" column="t_article_id"
+                select="com.qf.jianshu.mapper.TGoodMapper.findByAid"/>
+  </resultMap>
+  <select id="articleToGood" resultMap="ArticleToGood">
+    select t_article_id
+    from t_article
+    where t_article_status=0
+    and t_article_id=#{articleId,jdbcType=INTEGER}
+  </select>
+  <resultMap id="ArticleToPicture" type="com.qf.jianshu.vo.ArticleToPictureVo">
+    <id property="tArticleId" column="t_article_id"/>
+    <collection property="pictures" ofType="com.qf.jianshu.entity.TPicture" column="t_article_id"
+                select="com.qf.jianshu.mapper.TPictureMapper.findByAid"/>
+  </resultMap>
+  <select id="articleToPicture" resultMap="ArticleToPicture">
+    select t_article_id
+    from t_article
+    where t_article_status=0
+    and t_article_id=#{articleId,jdbcType=INTEGER}
+  </select>
+  <select id="findByUserId" parameterType="integer" resultType="com.qf.jianshu.entity.TArticle">
+    select t_article_title,t_article_reading_count,t_article_id
+    from t_article
+    where t_article_user_id=#{userId}
+    and t_article_status=0
+  </select>
+  <select id="findAllAritcle" resultType="com.qf.jianshu.entity.TArticle">
+    select t_article_title,t_article_reading_count,t_article_id
+    from t_article
+    where t_article_status=0
+  </select>
+  <update id="addReading" parameterType="com.qf.jianshu.entity.TArticle">
+    update t_article set t_article_reading_count =#{TArticleReadingCount}  where t_article_id=#{TArticleId} ;
+  </update>
+</mapper>
