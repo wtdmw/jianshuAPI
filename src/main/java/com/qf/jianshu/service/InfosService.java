@@ -13,5 +13,5 @@ public interface InfosService {
 
     MyUser getUserInfos(String userId);
 
-    List<HomeArticle> getArticle(String userId);
+    List<HomeArticle> getArticle(String userId,Integer currentPage);
 }

@@ -52,8 +52,8 @@ public interface InfosMapper {
     @Select("select * from js_user where id =#{userId}")
     MyUser getUserInfos(String userId);
 
-    @Select("select id,title,authorId,content,contentImg,timestamp  from js_article where authorId=#{userId}")
-    List<HomeArticle> getArticle(String userId);
+    @Select("select id,title,authorId,content,contentImg,timestamp  from js_article where authorId=#{userId} limit #{currentPage},8")
+    List<HomeArticle> getArticle(String userId,Integer currentPage);
 
 
 

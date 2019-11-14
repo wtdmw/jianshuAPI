@@ -36,8 +36,8 @@ public class InfosServiceImpl implements InfosService {
     }
 
     @Override
-    public List<HomeArticle> getArticle(String userId) {
-        List<HomeArticle> articleList = infosDao.getArticle(userId);
+    public List<HomeArticle> getArticle(String userId,Integer currentPage) {
+        List<HomeArticle> articleList = infosDao.getArticle(userId,currentPage*8);
         return articleList;
     }
 }
