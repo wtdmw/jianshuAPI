@@ -25,16 +25,18 @@ public class SearchController {
 
     @RequestMapping("/search")
     public Message getList(String keyword,@RequestParam(required = false,defaultValue = "note") String method) {
-        System.out.println(keyword+method);
-        if ("note".equals(method)) {
-            List searchNoteList = searchService.searchNoteList(keyword);
-            return Message.sucess().add("searchNoteList", searchNoteList);
-        } else if ("user".equals(method)) {
-            List searchUserList = searchService.searchUserList(keyword);
-            return Message.sucess().add("searchUserList", searchUserList);
-        } else if ("collection".equals(method)) {
-            List searchCollectionList = searchService.searchCollectionList(keyword);
-            return Message.sucess().add("searchCollectionList", searchCollectionList);
+          if(!keyword.equals("")){
+            System.out.println(keyword+method);
+            if ("note".equals(method)) {
+                List searchNoteList = searchService.searchNoteList(keyword);
+                return Message.sucess().add("searchNoteList", searchNoteList);
+            } else if ("user".equals(method)) {
+                List searchUserList = searchService.searchUserList(keyword);
+                return Message.sucess().add("searchUserList", searchUserList);
+            } else if ("collection".equals(method)) {
+                List searchCollectionList = searchService.searchCollectionList(keyword);
+                return Message.sucess().add("searchCollectionList", searchCollectionList);
+            }
         }
         return null;
     }
