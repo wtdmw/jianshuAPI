@@ -34,10 +34,10 @@ public class UserServiceImpl implements UserService {
 //        生成id
 
         user.setId(new BASE64Encoder().encode(user.getNickName().getBytes(StandardCharsets.UTF_8)));
-        System.out.println(user.getId());
+        //System.out.println(user.getId());
 //      获取创建时间
         long time = new Date().getTime();
-        System.out.println(time);
+        //System.out.println(time);
         user.setTimeStamp(time);
 
         int addUserInt = userMapper.addUser(user);
