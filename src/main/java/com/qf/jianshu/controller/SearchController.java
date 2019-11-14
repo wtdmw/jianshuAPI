@@ -24,17 +24,19 @@ public class SearchController {
 
 
     @RequestMapping("/search")
-    public Message getList(String keyword,@RequestParam(required = false,defaultValue = "note") String method) {
-        System.out.println(keyword+method);
-        if ("note".equals(method)) {
-            List searchNoteList = searchService.searchNoteList(keyword);
-            return Message.sucess().add("searchNoteList", searchNoteList);
-        } else if ("user".equals(method)) {
-            List searchUserList = searchService.searchUserList(keyword);
-            return Message.sucess().add("searchUserList", searchUserList);
-        } else if ("collection".equals(method)) {
-            List searchCollectionList = searchService.searchCollectionList(keyword);
-            return Message.sucess().add("searchCollectionList", searchCollectionList);
+    public Message getList(String keyword,@RequestParam(required = false,defaultValue = "note") String method,Integer currentPage) {
+        if(!keyword.equals("")){
+            System.out.println(keyword+method+currentPage);
+            if ("note".equals(method)) {
+                List searchNoteList = searchService.searchNoteList(keyword,currentPage);
+                return Message.sucess().add("searchNoteList", searchNoteList);
+            } else if ("user".equals(method)) {
+                List searchUserList = searchService.searchUserList(keyword,currentPage);
+                return Message.sucess().add("searchUserList", searchUserList);
+            } else if ("collection".equals(method)) {
+                List searchCollectionList = searchService.searchCollectionList(keyword,currentPage);
+                return Message.sucess().add("searchCollectionList", searchCollectionList);
+            }
         }
         return null;
     }

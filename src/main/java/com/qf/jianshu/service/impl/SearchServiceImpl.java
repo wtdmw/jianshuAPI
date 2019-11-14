@@ -18,25 +18,25 @@ public class SearchServiceImpl implements SearchService {
     private SearchMapper searchMapper;
 
     @Override
-    public List searchNoteList(String value) {
+    public List searchNoteList(String value,Integer currentPage) {
         value = "%" + value + "%";
-        List<SearchNote> searchNotes = searchMapper.searchNoteList(value);
+        List<SearchNote> searchNotes = searchMapper.searchNoteList(value,currentPage);
         return searchNotes;
 
 
     }
 
     @Override
-    public List searchUserList(String value) {
+    public List searchUserList(String value,Integer currentPage) {
         value = "%" + value + "%";
-        List<SearchUser> searchUsers = searchMapper.searchUserList(value);
+        List<SearchUser> searchUsers = searchMapper.searchUserList(value,currentPage);
         return searchUsers;
     }
 
     @Override
-    public List searchCollectionList(String value) {
+    public List searchCollectionList(String value,Integer currentPage) {
         value = "%" + value + "%";
-        List<SearchCollection> searchCollections = searchMapper.searchCollectionList(value);
+        List<SearchCollection> searchCollections = searchMapper.searchCollectionList(value,currentPage);
         return searchCollections;
     }
 }
