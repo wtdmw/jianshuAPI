@@ -40,7 +40,7 @@ public class LoginController {
             return new ResponseEntity<>(loginInfoMap, HttpStatus.FORBIDDEN);
         }
 
-        loginInfoMap.put("data", loginInfo);
+        loginInfoMap.put("data", login.get("user"));
         loginInfoMap.put("token", login.get("token"));
         return new ResponseEntity<>(loginInfoMap, HttpStatus.OK);
     }
